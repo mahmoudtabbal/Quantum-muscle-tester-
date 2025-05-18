@@ -38,10 +38,8 @@ def create_pdf(data):
         for key, value in entry.items():
             pdf.cell(200, 10, txt=f"{key}: {value}", ln=True)
         pdf.ln(5)
-    pdf_buffer = BytesIO()
-    pdf.output(pdf_buffer)
-    pdf_buffer.seek(0)
-    return pdf_buffer
+    pdf_output = pdf.output(dest='S').encode('latin1')  # output as bytes
+    return BytesIO(pdf_output)
 
 # App layout
 st.title("Intuitive Muscle Testing via SHA-256")
